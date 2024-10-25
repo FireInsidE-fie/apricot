@@ -19,6 +19,6 @@ clean:
 	$(RM) $(RMFLAGS) $(OBJS)
 fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
-re: all
+re: fclean all
 
 .PHONY: all re clean fclean
