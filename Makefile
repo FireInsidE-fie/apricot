@@ -13,6 +13,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) -o $@ $(OBJS)
+	$(CC) -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL libraylib.a $(OBJS) -o $@
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -include $(INCL) -c $<
 clean:
