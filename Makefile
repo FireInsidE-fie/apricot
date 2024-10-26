@@ -12,7 +12,7 @@ INCL=	$(INCLDIR)apricot.h
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $@ $(OBJS) `sdl2-config --cflags --libs`
+	$(CC) -o $@ $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -include $(INCL) -c $<
 clean:
