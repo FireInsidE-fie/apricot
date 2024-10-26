@@ -1,25 +1,25 @@
-NAME=	apricot
-CC=		gcc
-CFLAGS=	-Wall -Wextra -Werror
-RM=		rm
-RMFLAGS=-f
-SRCDIR=	src/
-SRCS=	$(SRCDIR)apricot.c
-OBJS=	$(SRCS:.c=.o)
-INCLDIR=include/
-INCL=	$(INCLDIR)apricot.h
+NAME	=	apricot
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror
+RM		=	rm
+RMFLAGS	=	-f
+SRCDIR	=	src/
+SRCS	=	$(SRCDIR)apricot.c
+OBJS	=	$(SRCS:.c=.o)
+IDIR	=	include
+INCL	=	apricot.h \
+			raylib.h
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $@ $(OBJS)
 	$(CC) -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL libraylib.a $(OBJS) -o $@
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -include $(INCL) -c $<
+	$(CC) $(CFLAGS) -I$(IDIR) -c $< -o $@
 clean:
 	$(RM) $(RMFLAGS) $(OBJS)
 fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
-re: all
+re: fclean all
 
 .PHONY: all re clean fclean
