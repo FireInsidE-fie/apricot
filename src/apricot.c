@@ -11,7 +11,7 @@ int main(void)
 	const int	screenHeight = 800;
 	const int	darkMode = 0;
 
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+	InitWindow(screenWidth, screenHeight, "apricot");
 
 	SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 	//--------------------------------------------------------------------------------------
