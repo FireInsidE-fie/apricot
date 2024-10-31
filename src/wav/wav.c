@@ -5,19 +5,16 @@
 
 int	read_wav_head(char *path)
 {
-	FILE	*file;
-	int		i;
-	int		c;
+	FILE		*file;
+	t_header	*header;
 
 	file = fopen(path, "r");
+	header = malloc(sizeof(t_header));
 	if (!file)
 		return (-1);
-	i = 0;
-	while (i++ < 44)
-	{
-		c = fgetc(file);
-		write(1, &c, 1);
-	}
+	// Parsing the header in the t_header struct
+	fread(header->riff, 1, 4, file); // RIFF string
+	// Wrapping up
 	fclose(file);
 	return (0);
 }
