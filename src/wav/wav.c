@@ -7,15 +7,18 @@ int	read_wav_head(char *path)
 {
 	FILE	*file;
 	int		i;
-	char	c;
+	int		c;
 
 	file = fopen(path, "r");
+	if (!file)
+		return (-1);
 	i = 0;
 	while (i++ < 44)
 	{
 		c = fgetc(file);
 		write(1, &c, 1);
 	}
+	fclose(file);
 	return (0);
 }
 
