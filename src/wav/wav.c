@@ -7,6 +7,8 @@ t_header	*read_wav_head(char *path)
 {
 	FILE		*file;
 	t_header	*header;
+	int			buffer4[4] = {0};
+	int			i;
 
 	file = fopen(path, "r");
 	header = malloc(sizeof(t_header));
@@ -16,7 +18,11 @@ t_header	*read_wav_head(char *path)
 		return (NULL);
 	}
 	// Parsing the header in the t_header struct
-	fread(header->riff, 1, 4, file); // RIFF string
+	fread(header->riff, sizeof(header->riff), 1, file); // RIFF string
+	fread(buffer4, 4, 1, file);
+	i = 0;
+	while (i < 4)
+		printf("%d", buffer4[i++]);
 	// Wrapping up
 	fclose(file);
 	return (header);
