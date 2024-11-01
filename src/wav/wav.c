@@ -19,8 +19,12 @@ t_header	*read_wav_head(char *path)
 	}
 	// Parsing the header in the t_header struct
 	fread(header->riff, sizeof(header->riff), 1, file); // RIFF string
+    header->riff[4] = 0;
 	fread(buffer4, 4, 1, file); // overall_size
-	header->overall_size = buffer4[0] | buffer4[1]<<8 | buffer4[2]<<16 | buffer4[3]<<24;
+	header->overall_size = buffer4[0] |
+    						buffer4[1]<<8 |
+    						buffer4[2]<<16 |
+							buffer4[3]<<24;
 	// Wrapping up
 	fclose(file);
 	return (header);
@@ -33,8 +37,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (-1);
 	header = read_wav_head(argv[1]);
-	printf("%s", header->riff);
-	printf("%u", header->overall_size);
+	printf("%s\n", header->riff);
+	printf("%u\n", header->overall_size);
 	free(header);
 	return (0);
 }
