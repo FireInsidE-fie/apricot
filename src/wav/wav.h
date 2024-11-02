@@ -1,8 +1,10 @@
+#include <stdint.h>
+
 // WAVE file header format
 typedef struct s_header {
-	unsigned char	riff[5];					// RIFF string (4 length)
-	unsigned int	overall_size;				// overall size of file in bytes
-	unsigned char	wave[5];					// WAVE string (4 length)
+	unsigned char	riff[4];					// RIFF string (4 length)
+	uint32_t		overall_size;				// overall size of file in bytes
+	unsigned char	wave[4];					// WAVE string (4 length)
 	unsigned char	fmt_chunk_marker[4];		// fmt string with trailing null char
 	unsigned int	length_of_fmt;				// length of the format data
 	unsigned int	format_type;				// format type. 1-PCM, 3- IEEE float, 6 - 8bit A law, 7 - 8bit mu law
