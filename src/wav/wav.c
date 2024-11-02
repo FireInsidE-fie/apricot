@@ -7,6 +7,7 @@ t_header	*read_wav_head(char *path)
 {
 	FILE		*file;
 	t_header	*header;
+	int			buffer2[2] = {0};
 	int			buffer4[4] = {0};
 	//int			i;
 
@@ -26,6 +27,17 @@ t_header	*read_wav_head(char *path)
 							buffer4[3]<<24;
 	fread(header->wave, sizeof(header->wave), 1, file);
 	fread(header->fmt_chunk_marker, sizeof(header->fmt_chunk_marker), 1, file);
+	fread(buffer4, 4, 1, file);
+	header->length_of_fmt = buffer4[0] |
+    						buffer4[1]<<8 |
+    						buffer4[2]<<16 |
+							buffer4[3]<<24;
+	fread(buffer2, 2, 1, file);
+	header->format_type = buffer2[0] |
+    						buffer2[1]<<8;
+	fread(buffer2, 2, 1, file);
+	header->sample_rate = buffer2[0] |
+    						buffer2[1]<<8;	
 	// Wrapping up
 	fclose(file);
 	return (header);
@@ -45,6 +57,9 @@ int	main(int argc, char **argv)
 	write(1, "\n", 1);
 	write(1, header->fmt_chunk_marker, 4);
 	write(1, "\n", 1);
+	printf("%u\n", header->length_of_fmt);
+	printf("%u\n", header->format_type);
+	printf("%u\n", header->channels);
 	free(header);
 	return (0);
 }

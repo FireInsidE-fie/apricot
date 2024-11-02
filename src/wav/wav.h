@@ -6,10 +6,10 @@ typedef struct s_header {
 	uint32_t		overall_size;				// overall size of file in bytes
 	unsigned char	wave[4];					// WAVE string (4 length)
 	unsigned char	fmt_chunk_marker[4];		// fmt string with trailing null char
-	unsigned int	length_of_fmt;				// length of the format data
-	unsigned int	format_type;				// format type. 1-PCM, 3- IEEE float, 6 - 8bit A law, 7 - 8bit mu law
-	unsigned int	channels;					// no.of channels
-	unsigned int	sample_rate;				// sampling rate (blocks per second)
+	uint32_t		length_of_fmt;				// length of the format data
+	uint16_t		format_type;				// format type. 1-PCM, 3- IEEE float, 6 - 8bit A law, 7 - 8bit mu law
+	uint16_t	channels;						// no.of channels
+	uint32_t	sample_rate;					// sampling rate (blocks per second)
 	unsigned int	byterate;					// SampleRate * NumChannels * BitsPerSample/8
 	unsigned int	block_align;				// NumChannels * BitsPerSample/8
 	unsigned int	bits_per_sample;			// bits per sample, 8- 8bits, 16- 16 bits etc
