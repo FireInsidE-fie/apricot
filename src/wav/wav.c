@@ -3,6 +3,34 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ * @brief Parsed a 32bit value from little endian to an unsigned int.
+ *
+ * @param buffer4 A 4 array of integers containing the 4 bytes of the le value.
+ * @return The parsed value as a uint32_t.
+ */
+uint32_t	parse_32_le(int *buffer4)
+{
+	return (buffer4[0] |
+			buffer4[1]<<8 |
+			buffer4[2]<<16 |
+			buffer4[3]<<24);
+}
+
+/**
+ * @brief Parsed a 16bit value from little endian to an unsigned int.
+ *
+ * @param buffer2 A 2 array of integers containing the 2 bytes of the le value.
+ * @return The parsed value as a uint16_t.
+ */
+uint16_t	parse_16_le(int *buffer2)
+{
+	return (buffer2[0] |
+			buffer2[1]<<8 |
+			buffer2[2]<<16 |
+			buffer2[3]<<24);
+}
+
 t_header	*read_wav_head(char *path)
 {
 	FILE		*file;
@@ -21,45 +49,26 @@ t_header	*read_wav_head(char *path)
 	// Parsing the header in the t_header struct
 	fread(header->riff, sizeof(header->riff), 1, file);
 	fread(buffer4, 4, 1, file);
-	header->overall_size = buffer4[0] |
-    						buffer4[1]<<8 |
-    						buffer4[2]<<16 |
-							buffer4[3]<<24;
+	header->overall_size = parse_32_le(buffer4);
 	fread(header->wave, sizeof(header->wave), 1, file);
 	fread(header->fmt_chunk_marker, sizeof(header->fmt_chunk_marker), 1, file);
 	fread(buffer4, 4, 1, file);
-	header->length_of_fmt = buffer4[0] |
-    						buffer4[1]<<8 |
-    						buffer4[2]<<16 |
-							buffer4[3]<<24;
+	header->length_of_fmt = parse_32_le(buffer4);
 	fread(buffer2, 2, 1, file);
-	header->format_type = buffer2[0] |
-    						buffer2[1]<<8;
+	header->format_type = parse_16_le(buffer2);
 	fread(buffer2, 2, 1, file);
-	header->channels = buffer2[0] |
-    						buffer2[1]<<8;	
+	header->channels = parse_16_le(buffer2);
 	fread(buffer4, 4, 1, file);
-	header->sample_rate = buffer4[0] |
-    						buffer4[1]<<8 |
-    						buffer4[2]<<16 |
-							buffer4[3]<<24;
+	header->sample_rate = parse_32_le(buffer4);
 	fread(buffer4, 4, 1, file);
-	header->byterate = buffer4[0] |
-    						buffer4[1]<<8 |
-    						buffer4[2]<<16 |
-							buffer4[3]<<24;
+	header->byterate = parse_32_le(buffer4);
 	fread(buffer2, 2, 1, file);
-	header->block_align = buffer2[0] |
-    						buffer2[1]<<8;	
+	header->block_align = parse_16_le(buffer2);
 	fread(buffer2, 2, 1, file);
-	header->bits_per_sample = buffer2[0] |
-    						buffer2[1]<<8;	
+	header->bits_per_sample = parse_16_le(buffer2);
 	fread(header->data_chunk_header, 4, 1, file);
 	fread(buffer4, 4, 1, file);
-	header->byterate = buffer4[0] |
-    						buffer4[1]<<8 |
-    						buffer4[2]<<16 |
-							buffer4[3]<<24;
+	header->byterate = parse_32_le(buffer4);
 	// Wrapping up
 	fclose(file);
 	return (header);
