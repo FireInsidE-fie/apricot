@@ -18,13 +18,14 @@ t_header	*read_wav_head(char *path)
 		return (NULL);
 	}
 	// Parsing the header in the t_header struct
-	fread(header->riff, sizeof(header->riff), 1, file); // RIFF string
-	fread(buffer4, 4, 1, file); // overall_size
+	fread(header->riff, sizeof(header->riff), 1, file);
+	fread(buffer4, 4, 1, file);
 	header->overall_size = buffer4[0] |
     						buffer4[1]<<8 |
     						buffer4[2]<<16 |
 							buffer4[3]<<24;
-	fread(header->wave, sizeof(header->riff), 1, file); // WAVE string
+	fread(header->wave, sizeof(header->wave), 1, file);
+	fread(header->fmt_chunk_marker, sizeof(header->fmt_chunk_marker), 1, file);
 	// Wrapping up
 	fclose(file);
 	return (header);
@@ -41,6 +42,8 @@ int	main(int argc, char **argv)
 	write(1, "\n", 1);
 	printf("%u\n", header->overall_size);
 	write(1, header->wave, 4);
+	write(1, "\n", 1);
+	write(1, header->fmt_chunk_marker, 4);
 	write(1, "\n", 1);
 	free(header);
 	return (0);
