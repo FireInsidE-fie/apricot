@@ -1,4 +1,6 @@
-#include <stdint.h>
+#ifndef WAV_H
+# define WAV_H
+# include <stdint.h>
 
 // WAVE file header format
 typedef struct s_header {
@@ -18,3 +20,5 @@ typedef struct s_header {
 } t_header;
 
 t_header	*read_wav_head(char *path);
+
+#endif
