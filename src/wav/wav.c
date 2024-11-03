@@ -68,7 +68,7 @@ t_header	*read_wav_head(char *path)
 	header->bits_per_sample = parse_16_le(buffer2);
 	fread(header->data_chunk_header, 4, 1, file);
 	fread(buffer4, 4, 1, file);
-	header->byterate = parse_32_le(buffer4);
+	header->data_size = parse_32_le(buffer4);
 	// Wrapping up
 	fclose(file);
 	return (header);
@@ -81,6 +81,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (-1);
 	header = read_wav_head(argv[1]);
+	if (!header)
+	{
+		printf("[!] - Error when opening file!\n");
+		return (-1);
+	}
 	write(1, header->riff, 4);
 	write(1, "\n", 1);
 	printf("%u\n", header->overall_size);
