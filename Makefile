@@ -4,11 +4,13 @@ CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm
 RMFLAGS	=	-f
 SRCDIR	=	src/
-SRCS	=	$(SRCDIR)apricot.c
+SRCS	=	$(SRCDIR)apricot.c \
+			$(SRCDIR)/wav/wav.c
 OBJS	=	$(SRCS:.c=.o)
 IDIR	=	include
 INCL	=	apricot.h \
-			raylib.h
+			raylib.h \
+			wav.h
 
 all: $(NAME)
 

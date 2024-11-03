@@ -16,3 +16,5 @@ typedef struct s_header {
 	unsigned char	data_chunk_header[4];		// DATA string or FLLR string
 	uint32_t		data_size;					// NumSamples * NumChannels * BitsPerSample/8 - size of the next chunk that will be read
 } t_header;
+
+t_header	*read_wav_head(char *path);

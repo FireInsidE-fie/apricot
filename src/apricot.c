@@ -3,13 +3,17 @@
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
-int main(void)
+int main(int argc, char **argv)
 {
 	// Initialization
 	//--------------------------------------------------------------------------------------
-	const int	screenWidth = 1200;
-	const int	screenHeight = 800;
-	const int	darkMode = 0;
+	const int		screenWidth = 1200;
+	const int		screenHeight = 800;
+	//const int		darkMode = 0;
+	const t_header	*header = read_wav_head(argv[1]);
+
+	if (argc != 2)
+		return (-1);
 
 	InitWindow(screenWidth, screenHeight, "apricot");
 
@@ -28,13 +32,10 @@ int main(void)
 		//----------------------------------------------------------------------------------
 		BeginDrawing();
 
-		if (darkMode)
-			ClearBackground(DARKGRAY);
-		else
-			ClearBackground(RAYWHITE);
+		ClearBackground(RAYWHITE);
 
-		DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-		DrawText("apricot", 20, 20, 75, ORANGE);
+		DrawText("apricot", 20, 20, 64, ORANGE);
+		DrawText(TextFormat("Number of channels: %08i", header->channels), 200, 80, 20, RED);
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
