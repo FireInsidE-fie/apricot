@@ -35,7 +35,12 @@ int main(int argc, char **argv)
 		ClearBackground(RAYWHITE);
 
 		DrawText("apricot", 20, 20, 64, ORANGE);
-		DrawText(TextFormat("Number of channels: %08i", header->channels), 200, 80, 20, RED);
+		DrawText(TextFormat("File name: %s", argv[1]), 20, 100, 32, BLACK);
+		DrawText(TextFormat("Total size: %uKB", header->overall_size / 1000), 20, 150, 20, BLACK);
+		DrawText(TextFormat("Number of channels: %u", header->channels), 20, 175, 20, BLACK);
+		DrawText(TextFormat("Sample rate : %uhz", header->sample_rate), 20, 200, 20, BLACK);
+		DrawText(TextFormat("Bits per sample: %u", header->bits_per_sample), 20, 225, 20, BLACK);
+		DrawText(TextFormat("Duration of file: %u seconds", header->data_size / header->byterate), 20, 250, 20, BLACK);
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------

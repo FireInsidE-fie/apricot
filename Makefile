@@ -5,7 +5,7 @@ RM		=	rm
 RMFLAGS	=	-f
 SRCDIR	=	src/
 SRCS	=	$(SRCDIR)apricot.c \
-			$(SRCDIR)/wav/wav.c
+			$(SRCDIR)wav/wav.c
 OBJS	=	$(SRCS:.c=.o)
 IDIR	=	include
 INCL	=	apricot.h \
