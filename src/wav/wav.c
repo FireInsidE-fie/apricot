@@ -1,4 +1,4 @@
-#include "wav.h"
+#include "../../include/wav.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -73,7 +73,7 @@ t_header	*read_wav_head(char *path)
 	fclose(file);
 	return (header);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	t_header	*header;
@@ -109,3 +109,4 @@ int	main(int argc, char **argv)
 	free(header);
 	return (0);
 }
+*/
