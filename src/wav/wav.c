@@ -103,6 +103,9 @@ int	main(int argc, char **argv)
 	write(1, header->data_chunk_header, 4);
 	write(1, "\n", 1);
 	printf("%u\n", header->data_size);
+
+	printf("Duration of file : %u seconds\n",
+			header->data_size / header->byterate);
 	free(header);
 	return (0);
 }
