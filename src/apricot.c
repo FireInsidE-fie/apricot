@@ -1,5 +1,9 @@
 #include "../include/apricot.h"
 
+// Begin macro definitions
+#define TITLE_COLOR ORANGE
+#define TEXT_COLOR BLACK
+
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -34,13 +38,13 @@ int main(int argc, char **argv)
 
 		ClearBackground(RAYWHITE);
 
-		DrawText("apricot", 20, 20, 64, ORANGE);
-		DrawText(TextFormat("File name: %s", argv[1]), 20, 100, 32, BLACK);
-		DrawText(TextFormat("Total size: %uKB", header->overall_size / 1000), 20, 150, 20, BLACK);
-		DrawText(TextFormat("Number of channels: %u", header->channels), 20, 175, 20, BLACK);
-		DrawText(TextFormat("Sample rate : %uhz", header->sample_rate), 20, 200, 20, BLACK);
-		DrawText(TextFormat("Bits per sample: %u", header->bits_per_sample), 20, 225, 20, BLACK);
-		DrawText(TextFormat("Duration of file: %u seconds", header->data_size / header->byterate), 20, 250, 20, BLACK);
+		DrawText("apricot", 20, 20, 64, TITLE_COLOR);
+		DrawText(TextFormat("File name: %s", argv[1]), 20, 100, 32, TEXT_COLOR);
+		DrawText(TextFormat("Total size: %uKB", header->overall_size / 1000), 20, 150, 20, TEXT_COLOR);
+		DrawText(TextFormat("Number of channels: %u", header->channels), 20, 175, 20, TEXT_COLOR);
+		DrawText(TextFormat("Sample rate : %uhz", header->sample_rate), 20, 200, 20, TEXT_COLOR);
+		DrawText(TextFormat("Bits per sample: %u", header->bits_per_sample), 20, 225, 20, TEXT_COLOR);
+		DrawText(TextFormat("Duration of file: %u seconds", header->data_size / header->byterate), 20, 250, 20, TEXT_COLOR);
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
