@@ -2,3 +2,5 @@ apricot
 *.o
 a.out
 a.out.dSYM/
+.zig-cache/
+zig-out/
