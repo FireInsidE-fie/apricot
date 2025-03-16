@@ -1,0 +1,15 @@
+const WavHeader = struct {
+	const id_riff: u8[4],
+	const file_size: u32,
+	const id_wave: u8[4],
+	const id_fmt: u8[4],
+	const fmt_length: u32,
+	const fmt_type: u16,
+	const channels: u16,
+	const sample_rate: u32,
+	const byte_rate: u32,
+	const block_align: u16,
+	const bits_per_sample: u16,
+	const id_data: u8[4],
+	const size_data: u32,
+}
